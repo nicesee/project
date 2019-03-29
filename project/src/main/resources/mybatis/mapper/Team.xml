@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dao.TeamDAO">
+
+    <select id="get" parameterType="map" resultType="TeamEntity">
+        SELECT t.id ,t.status,t.teamNumber,u.`name` as teamName,t.task,t.projectID
+        FROM team t LEFT JOIN user u on t.teamNumber = u.id
+        <if test="projectID != null and projectID != 0">
+            and t.projectID = #{projectID}
+        </if>
+    </select>
+
+    <select id="getByEntity" parameterType="teamEntity" resultType="TeamEntity">
+        SELECT t.id ,t.status,t.teamNumber,u.`name` as teamName,t.task,t.projectID
+        FROM team t LEFT JOIN user u on t.teamNumber = u.id
+         and t.id = #{id}
+    </select>
+
+    <select id="get_" parameterType="map" resultType="TeamEntity">
+        SELECT t.id ,t.status,t.teamNumber,u.`name` as teamName,t.task,t.projectID
+        FROM team t LEFT JOIN user u on t.teamNumber = u.id
+        where t.status = 1
+        <if test="projectID != null and projectID != 0">
+            and t.projectID = #{projectID}
+        </if>
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="int">
+    </select>
+
+
+    <update id="update" parameterType="teamEntity">
+        update `team` set `status` = 1
+        <if test="teamNumber != null">
+            , `teamNumber` = #{teamNumber}
+        </if>
+        <if test="teamName != null">
+            , `teamName` = #{teamName}
+        </if>
+        <if test="task != null">
+            , `task` = #{task}
+        </if>
+        where status = 1
+        <if test="id != 0 and id != null">
+            and id = #{id}
+        </if>
+        <if test="id == 0">
+            and task = #{task} and `projectID` = #{projectID}
+        </if>
+
+    </update>
+
+    <update id="delete" parameterType="teamEntity">
+        update `team` set status = 0 where id = #{id}
+    </update>
+
+    <insert id="add" parameterType="teamEntity">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into `team` (`status` ,`teamNumber` ,`task`, `projectID`)
+        values (1, #{teamNumber}, #{task}, #{projectID})
+    </insert>
+
+</mapper>

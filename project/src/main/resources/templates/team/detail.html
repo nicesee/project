@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>项目管理 | 项目详情查看</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/googleapis.css">
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Theme style -->
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!--头部-->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/main" class="logo">
+            <span style="font-size: 35px" class="logo-lg"><b>首页</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <div style="float: right">
+                <p style="font-size: 25px;color: white;margin-right: 30px;" th:text="'欢迎用户'+${session.user.name}"></p>
+                <a href="/user/logout">
+                    <p style="color: blue;text-align: center">退出登录</p>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <!--菜单-->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <!-- search form -->
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <div style="height: 20px"></div>
+                <li class="active treeview">
+                    <a href="/project/list">
+                        <span style="font-size: 16px;color: #3c8dbc">项目查看</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content" style="height: 666px">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <div style="height: 650px;overflow: auto;">
+                        <form id="teamForm" method="post" action="/team/add">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <label >项目名称</label>
+                                    <input name="name" class="input-daterange " readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="">项目负责人</label>
+                                    <input name="mainNumber" class="input-daterange " readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-5" id = "projectStatus">项目状态</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="height: 15px"></div>
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <label style="display: inline-block;float: left">项目描述</label>
+                                    <textarea class="col-md-8" name="des" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="height: 15px"></div>
+                            <button onclick="addList()" type="submit" class="btn btn-default" style="float: right;margin-right: 57px">添加</button>
+                            <div class="box-body no-padding">
+                                <table class="table table-bordered table-hover" >
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>任务</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="team">
+                                    <tr>
+                                        <td>
+                                            <select id='teamNumber' disabled >
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input name='task' readonly value="项目负责人">
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <input hidden name="projectID">
+                            <input hidden name="n">
+                            <input class="btn" type="submit" style="float: right;margin-right: 57px">提交</input>
+                        </form>
+                    </div>
+                </section>
+                <!-- /.Left col -->
+            </div>
+            <!-- /.row (main row) -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+    </footer>
+</div>
+<script src="http://adminlte.la998.com/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script th:inline="javascript">
+    // var account = document.getElementById("account").innerHTML ;
+    var account = [[${session.user}]];
+    var check = [[${check}]];//0添加1修改2查看
+    var projectID = [[${projectID}]];
+
+    var n = 0;
+//填充 项目信息
+    $.post("/project/getEntity",{"ID":projectID},function (data,status) {
+        if(status == "success"){
+            var team = JSON.parse(data);
+            $("input[name = 'name']").val(team.name);
+            $("input[name = 'mainNumber']").val(team.mainName);
+            $("textarea[name = 'des']").val(team.des);
+            $('#projectStatus').text("项目状态："+team.projectStatus);
+            getSelect('teamNumber',team.mainNumber);
+        }
+    });
+
+
+    $.post("/team/get", {"projectID": projectID}, function (data, status) {
+        $('input[name="projectID"]').val(projectID);
+        if (status == "success") {
+            var d = JSON.parse(data);
+            for (var i = 0; i < d.length; i++) {
+                var team = d[i];
+                addList(team);
+            }
+            if (!(d.length > 0)) {
+                addList();
+            }
+        }
+    });
+    function addList(team) {
+        n++;
+        $('input[name="n"]').val(n);
+        var count = "";
+        count += "<tr>";
+        count += "<td>";
+        count += "<select name='teamNumber"+n+"' id='id"+n+"'>";
+        count += "</select>";
+        count += "</td>";
+        count += "<td>";
+        count += "<input name='task"+n+"' id='task"+n+"'>";
+        count += "</td>";
+        count += "</tr>"
+        $('#team').append(count);
+        if(team == null){
+            getSelect("id"+n , null);
+        }else {
+            getSelect("id"+n , team.teamNumber);
+            $('#task'+n).val(team.task);
+        }
+        if(check==2){
+            $("select[name=teamNumber"+n+"]").attr("disabled",'true');
+            $("input[name=task"+n+"]").attr("readonly",true);
+        }
+    }
+
+    function getSelect(name ,selected){
+        $.post("/user/get",{"projectID":projectID},function (data,status) {
+            var d = JSON.parse(data);
+            for (var i = 0; i < d.length; i++) {
+                var userList = d[i];
+                if(userList.id == selected){
+                    $("#"+name+"").append("<option value='"+userList.id+"' selected>"+userList.name+"</option>");
+                }else{
+                    $("#"+name+"").append("<option value='"+userList.id+"'>"+userList.name+"</option>");
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

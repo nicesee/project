@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.dao.ProjectDAO">
+
+    <select id="get" parameterType="map" resultType="ProjectEntity">
+        select * FROM `project` where status = 1
+
+        <if test="mainNumber != null">
+            and mainNumber = #{mainNumber}
+        </if>
+        <if test="start != null and limit != null">
+            limit ${start}, ${limit}
+        </if>
+    </select>
+
+    <select id="getByEntity" parameterType="ProjectEntity" resultType="ProjectEntity">
+        select * from `project` where id = #{id} and status = 1
+    </select>
+
+    <select id="get_" parameterType="map" resultType="ProjectEntity">
+        select * FROM `project` where status = 1
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="int">
+        select count(*) FROM `project` where status = 1
+
+        <if test="mainNumber != null">
+            and mainNumber = #{mainNumber}
+        </if>
+    </select>
+
+    <update id="update" parameterType="ProjectEntity">
+        update `project` set `status` ='1'
+        <if test="name != null">
+            , `name` = #{name}
+        </if>
+        <if test="des != null">
+            , `des` = #{des}
+        </if>
+        <if test="projectStatus != null">
+            , `projectStatus` = #{projectStatus}
+        </if>
+        <if test="mainNumber != null">
+            , `mainNumber` = #{mainNumber}
+        </if>
+        <if test="mainName != null">
+            , `mainName` = #{mainName}
+        </if>
+        where id = #{id}
+    </update>
+
+    <insert id="add" parameterType="ProjectEntity">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into `project` (`name` ,`des` ,`projectStatus`, `status`, `mainNumber`,`mainName`)
+        values (#{name}, #{des}, #{projectStatus}, 1, #{mainNumber},#{mainName})
+    </insert>
+
+</mapper>

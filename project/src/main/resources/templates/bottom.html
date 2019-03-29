@@ -1,0 +1,145 @@
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<meta language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8">-->
+<!--<footer class="main-footer">-->
+    <!--&lt;!&ndash;<img style="float: right;line-height:60px;height: 10px" th:src="@{#{domain}+'/adminlte/common/images/bottom.png'}" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<img style="float: right;line-height:60px;height: 15px;" src="/images/bottom.jpg" />&ndash;&gt;-->
+    <!--<div style="height: 10px;">-->
+        <!--<img style="float: right;line-height:60px;height: 15px;" src="/images/bottom.png" />-->
+        <!--&lt;!&ndash;<p style="float: right;letter-spacing:1px; color: #f39c12;font-weight: bolder; font-family: 'Courier New', Courier, monospace, arial-black;margin-bottom: 10px"><strong style="font-size:16px">CZW</strong>orks</p>&ndash;&gt;-->
+    <!--</div>-->
+<!--</footer>-->
+
+<!--<div class="modal" id="window-alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <!--<h4 class="modal-title">提示</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<div class="modal" id="window-error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <!--<h4 class="modal-title text-red">错误</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<p class="text-red"></p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<div class="modal" id="window-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <!--<h4 class="modal-title">确认</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<p></p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-primary" id="confirm" data-loading-text="确认">确认</button>-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<div class="modal" id="window-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<form role="form">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--<h4 class="modal-title"></h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-primary hidden" id="apply" data-loading-text="应用">应用</button>-->
+                    <!--<button type="button" class="btn btn-primary" id="submit" data-loading-text="确认">确认</button>-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<div class="modal" id="window-form-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<form role="form" method="post" enctype="multipart/form-data" name="form-file">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--<h4 class="modal-title"></h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="file" name="file" class="file">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-primary" id="upload" data-loading-text="上传">上传</button>-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<div class="modal" id="window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <!--<h4 class="modal-title"></h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+<!--<include th:include="js" />-->
+
+<!--<script>-->
+    <!--$('.main-footer strong span').html(moment().format('YYYY'));-->
+    <!--$('#window-form form').bootstrapValidator({});-->
+    <!--$('#window-form-file form input[name="file"]').fileinput({-->
+<!--//        language: 'zh',-->
+        <!--allowedFileExtensions : ['xls','jpg','png'],-->
+        <!--showUpload: false,-->
+        <!--fileActionSettings: {showUpload: false}-->
+    <!--});-->
+    <!--// 在模态框出现后添加可拖拽功能-->
+    <!--$(document).on("show.bs.modal", ".modal", function() {-->
+        <!--// 只能点击头部拖动-->
+<!--//        $(this).draggable({-->
+<!--//            handle: ".modal-header",-->
+<!--//            cursor: "crosshair"-->
+<!--//        });-->
+        <!--$(this).draggable();-->
+        <!--// 防止出现滚动条，出现的话，你会把滚动条一起拖着走的-->
+        <!--$(this).css("overflow", "hidden");-->
+        <!--$(this).css("background", "none");-->
+    <!--});-->
+<!--</script>-->

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>项目管理 | 项目详情查看</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/googleapis.css">
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Theme style -->
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!--头部-->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/main" class="logo">
+            <span style="font-size: 35px" class="logo-lg"><b>首页</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <div style="float: right">
+                <p style="font-size: 25px;color: white;margin-right: 30px;" th:text="'欢迎用户'+${session.user.name}"></p>
+                <a href="/user/logout">
+                    <p style="color: blue;text-align: center">退出登录</p>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <!--菜单-->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <!-- search form -->
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <div style="height: 20px"></div>
+                <li class="active treeview">
+                    <a href="/project/list">
+                        <span style="font-size: 16px;color: #3c8dbc">项目查看</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content" style="height: 666px">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <div style="height: 650px;overflow: auto;">
+                        <form id="form">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <label >项目名称</label>
+                                <input name="name" class="input-daterange ">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="">项目负责人</label>
+                                <select name="mainNumber" id="mainNumber">
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="col-md-5" id = "projectStatus">项目状态:发起中</label>
+                            </div>
+                        </div>
+                            <div class="col-md-12" style="height: 15px"></div>
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <label style="display: inline-block;float: left">项目描述</label>
+                                    <textarea class="col-md-8" name="des"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="height: 15px"></div>
+                            <button id="submit" class="btn" type="button" onclick="add()" style="float: right;margin-right: 57px">提交</button>
+                        </form>
+                    </div>
+                </section>
+                <!-- /.Left col -->
+            </div>
+            <!-- /.row (main row) -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+    </footer>
+</div>
+<script src="http://adminlte.la998.com/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script th:inline="javascript">
+    // var account = document.getElementById("account").innerHTML ;
+    var account = [[${session.user}]];
+    var check = [[${check}]];//0添加1修改2查看
+    var ID = [[${ID}]];
+    if(check != 0){
+        //修改
+        $.post("/project/getEntity",{"ID":ID},function (data,status) {
+            debugger;
+            if(status == "success"){
+                var team = JSON.parse(data);
+                    $("input[name = 'name']").val(team.name);
+                    $("input[name = 'projectStatus']").val(team.projectStatus);
+                    $("textarea[name = 'des']").val(team.des);
+                    getSelect("mainNumber",team.mainNumber);
+                // if(check == 2) {//查看
+                //     $("input[name = 'name']").attr("readonly",true);
+                //     $("input[name = 'projectStatus']").attr("readonly",true);
+                //     $("textarea[name = 'des']").attr("readonly",true);
+                //     $("select[name = 'mainNumber']").attr("disabled",'true');
+                //     $('#projectStatus').text("项目状态：团队组件中");
+                //     $('#submit').attr("style","display:none;");
+                //     }
+            }
+        });
+    }else {getSelect("mainNumber",null);}
+
+    function getSelect(name ,selected){
+            $.post("/user/get",{},function (data,status) {
+            debugger;
+            var d = JSON.parse(data);
+            for (var i = 0; i < d.length; i++) {
+                var userList = d[i];
+                if(userList.id == selected){
+                    $("#"+name+"").append("<option value='"+userList.id+"' selected>"+userList.name+"</option>");
+                }else{
+                    $("#"+name+"").append("<option value='"+userList.id+"'>"+userList.name+"</option>");
+                }
+            }
+        });
+    }
+
+    function add() {
+        debugger;
+        var name = $('input[name="name"]').val();
+        var des = $('textarea[name="des"]').val();
+        var mainName = $('#mainNumber option:selected').text();//选中的文本
+        var mainNumber = $('#mainNumber option:selected') .val();//选中的值
+        if(name == null || name == ''){
+            alert("项目名称不能为空！");
+            // window.event.returnValue = false;
+        }else {
+            var url = '';
+            if(check == 0){
+                url= "/project/add";
+            }else {
+                url="/project/update?ID="+ID;
+            }
+            $.post(url,{"projectStatus":"团队组件中","name":name,"des":des,"mainName":mainName,"mainNumber":mainNumber},function (data,status) {
+                if(status=='success'){
+                    alert("项目添加成功！！");
+                    window.location.href = '/project/list';
+                }else {
+                    alert("项目添加失败！！");
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

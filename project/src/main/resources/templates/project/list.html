@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>项目管理 | 项目查看</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/googleapis.css">
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Theme style -->
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!--头部-->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/main" class="logo">
+            <span style="font-size: 35px" class="logo-lg"><b>首页</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <div style="float: right">
+                <p style="font-size: 25px;color: white;margin-right: 30px;" th:text="'欢迎用户'+${session.user.name}"></p>
+                <a href="/user/logout">
+                    <p style="color: blue;text-align: center">退出登录</p>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <!--菜单-->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <!-- search form -->
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <div style="height: 20px"></div>
+                <li class="active treeview">
+                    <a href="/project/list">
+                        <span style="font-size: 16px;color: #3c8dbc">项目查看</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content" style="height: 666px">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <a href="/project/updateList?check=0&ID=null">
+               <button type="button" id="add" class="btn" style="float: right;margin-right: 74px">添加</button>
+                </a>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <div style="height: 650px;overflow: auto;">
+                    <table class="table table-bordered table-hover" >
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>项目名称</th>
+                            <th>项目描述</th>
+                            <th>项目负责人</th>
+                            <th>项目状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="project">
+                        </tbody>
+                    </table>
+                    </div>
+                </section>
+                <!-- /.Left col -->
+            </div>
+            <!-- /.row (main row) -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+    </footer>
+</div>
+<script src="http://adminlte.la998.com/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script th:inline="javascript">
+    // var account = document.getElementById("account").innerHTML ;
+    var account = [[${session.user}]];
+    var flag = [[${flag}]];
+    if(flag != null){
+        if(flag == 'true'){
+            alert("修改成功！")
+        }else {
+            alert("修改失败！")
+        }
+    }
+    function query() {
+        $.ajax({
+            type: 'POST',
+            url: "/project/get",
+            dataType: "json",
+            success: function (data,status) {
+                debugger;
+                var pageResult = JSON.parse(data.pageResult);
+                var data = pageResult[0].data;
+                if (status == 'success') {
+                    var count = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var project = data[i];
+                        count += "<tr>";
+                        count += "<td>" + (i + 1) + "</td>";
+                        count += "<td>" + project.name + "</td>";
+                        count += "<td>" + project.des + "</td>";
+                        count += "<td>" + project.mainName + "</td>";
+                        count += "<td>" + project.projectStatus + "</td>";
+                        count += "<td>";
+                        if((project.projectStatus == '团队组建' || account.identity != '研究人员')&&project.projectStatus!='已结项'&&project.projectStatus!='申请结项中') {
+                            count += "<div class='col-md-2'>";
+                            count += "<a href='/project/updateList?check=1&ID=" + project.id + "' style='color: blue'>项目修改</a>";
+                            count += "</div>";
+                            count += "<div class='col-md-2'>";
+                            count += "<a href='/team/updateList?check=1&ID=" + project.id + "' style='color: blue'>修改</a>";
+                            count += "</div>";
+                            count += "<div class='col-md-2'>";
+                            count += "<a href='/project/upStatus?projectStatus=申请结项中&ID=" + project.id + "' style='color: blue'>申请结项</a>";
+                            count += "</div>";
+                        }
+                        if(account.identity != '研究人员' && project.projectStatus == '申请结项中'){
+                            count += "<div class='col-md-2'>";
+                            count += "<a href='/project/upStatus?projectStatus=已结项&ID=" + project.id + "' style='color: blue'>结项</a>";
+                            count += "</div>";
+                        }
+                        if (check = 2) { $('#add').attr("style","display:none;");}
+                        count += " <div class='col-md-2'>";
+                        count += "<a href='/team/updateList?check=2&ID=" + project.id + "' style='color: blue'>查看详情</a>";
+                        count += "</div>";
+                        count += "</td>";
+                        count += "</tr>";
+                    }
+                    var tBody = $('#project');
+                    tBody.empty();
+                    tBody.append(count);
+                }
+                console.log(data)
+            },
+            error: function () {
+                console.log("fucking error")
+            }
+        });
+    }
+    query();
+</script>
+</body>
+</html>

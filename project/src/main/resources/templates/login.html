@@ -1,0 +1,107 @@
+<!DOCTYPE html >
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .login_img{
+            background-size:contain|cover;
+            width:100%;
+            height: auto;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>项目管理平台 | 登陆</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="http://adminlte.la998.com/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="http://adminlte.la998.com/dist/css/googleapis.css">
+
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<img src="" class="login_img">
+<body class="hold-transition login-page" style="background: url('http://localhost:8686/images/backGround/loginBGP.jpg')">
+<div class="login-box">
+    <div class="login-logo">
+        <b>项目管理</b>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg" id="check">请登录</p>
+
+        <form>
+            <div class="form-group has-feedback">
+                <input name="account" type="text" class="form-control" placeholder="用户名">
+            </div>
+            <div class="form-group has-feedback">
+                <input name="password" type="password" class="form-control" placeholder="密码">
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <button onclick="register()" type="button" class="btn btn-primary btn-block ">注册</button>
+                </div>
+                <div class="col-xs-4"></div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button onclick="login()" type="button" class="btn btn-primary btn-block ">
+                        登陆
+                    </button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <!-- /.social-auth-links -->
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="http://adminlte.la998.com/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="http://adminlte.la998.com/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="http://adminlte.la998.com/plugins/iCheck/icheck.min.js"></script>
+<script th:inline="javascript">
+    function login() {
+        var account = $("input[name='account']").val();
+        var password = $("input[name='password']").val();
+        if (account == null || account == "") {
+            alert("用戶名不能为空！")
+        } else if (password == "" || password == null) {
+            alert("密码不能为空！")
+        } else {
+            $.post('/user/login', {"account": account, "password": password}, function (data, status) {
+                debugger;
+                if (data.check == "true") {
+                    window.location.href = "/main";
+                    window.event.returnValue = false;
+                } else {
+                    alert("用户名或密码错误！")
+                }
+            });
+        }
+    }
+
+
+    function register() {
+        window.location.href = "/register";
+        window.event.returnValue = false;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+.text-center-x{
+    background:red;
+}
+.well-large{
+    background: #FFF;
+}
+.img-circle{
+    width: 150px;
+    height: 150px;
+}
+
+.glyphicon-thumbs-up{
+    color: rgb(212, 106, 64);
+    font-size: 20px;
+}
+.container{
+    margin-top: 20px;
+}
+.row-margin-top {
+    margin-left: 20px;
+    width:750px;
+}
+.well{
+    background: #FFF;
+}
+.img-circle_puls{
+    width: 54px;
+    height: 54px;
+}
+.text-uppercase{
+    color:#01FF70;
+    font-size: 18px;
+}
+.media-heading{
+    font-size: 16px;
+}
+.well-puls{
+    height: 158px;
+}
+/*取消全局滚动*/
+::-webkit-scrollbar {
+    display:none;
+}
+.well-x{
+    height: 650px;width: 30%;
+    margin-left: 25px;
+}
+.pull-right-x{
+    width: 50%;
+    margin-bottom: 50px;
+    margin-left:-20PX;
+}
+.max-ico-ranking{
+    height: 85%;
+    width: 75%;
+}
+.min-ico-ranking{
+    height: 20%;width: 20%;
+}
+.row-margin-top-x{
+    height: 413px;
+}
+p{
+    margin: 0 0 5px;
+}
+.message{
+    display: none;
+}
+.row-header{
+    margin-top:-20px;
+    margin-left:-20px;
+    background: linear-gradient(#000, #1AAF92);
+    width: 113%;
+    height: 38%;
+}
+.text-center-ico{
+    padding-top: 28px;
+}
+.glyphicon-puls{
+}
+.mm-score{
+    color:#EE8300;
+    font-size:36px;
+}
+.sum-score{
+    font-size:36px;
+    color:#0FC6A3;
+}
+.userName{
+    color:#FFF;
+}
+.btn-primary-padd{
+    margin-left:25px;
+    padding: 5% 6%;
+}
+.table-hobbies{
+    margin-left:-23px;
+}
+.table-puls tbody{
+    width: 20%;
+    line-height: 38px;
+}.text-center-x{
+     background:red;
+ }
+.well-large{
+    background: #FFF;
+}
+.img-circle{
+    width: 150px;
+    height: 150px;
+}
+
+.glyphicon-thumbs-up{
+    color: rgb(212, 106, 64);
+    font-size: 20px;
+}
+.container{
+    margin-top: 20px;
+}
+.row-margin-top {
+    margin-left: 20px;
+    width: 65%;
+}
+.well{
+    background: #FFF;
+}
+.img-circle_puls{
+    width: 54px;
+    height: 54px;
+}
+.text-uppercase{
+    color:#01FF70;
+    font-size: 18px;
+}
+.media-heading{
+    font-size: 16px;
+}
+.well-puls{
+    height: 158px;
+}
+/*取消全局滚动*/
+::-webkit-scrollbar {
+    display:none;
+}
+.well-x{
+    height: 700px;width: 30%;
+    margin-left: 25px;
+}
+.pull-right-x{
+    width: 58%;
+    margin-bottom: 0px;
+}
+.max-ico-ranking{
+    height: 90%;
+    width: 90%;
+}
+.min-ico-ranking{
+    height: 14%;
+    width: 14%;
+}
+.row-margin-top-x{
+    height: 462px;
+}
+.message{
+    display: none;
+}
+.row-header{
+    margin-top:-20px;
+    margin-left:-20px;
+    background: linear-gradient(#424242, #1abd9e);
+    width: 109%;
+    height: 38%;
+}
+.text-center-ico{
+    padding-top: 28px;
+}
+.glyphicon-puls{
+}
+.mm-score{
+    color:#EE8300;
+    font-size:36px;
+}
+.sum-score{
+    font-size:36px;
+    color:#0FC6A3;
+}
+.userName{
+    color:#FFF;
+}
+.btn-primary-padd{
+    margin-left:8px;
+    padding: 1% 1%;
+}
+.table-hobbies{
+    margin-left:-23px;
+}
+.table-puls tbody{
+    width: 20%;
+    line-height: 38px;
+}
+.modal-x{
+    z-index: 1045;
+}
